@@ -1,8 +1,10 @@
 typedef int MazeElementType;
 
-const MazeElementType MAZE_ELEMENT_TYPE_EMPTY  = 0;
-const MazeElementType MAZE_ELEMENT_TYPE_FINISH = 1;
-const MazeElementType MAZE_ELEMENT_TYPE_WALL   = 2;
+enum MazeElementType {
+    empty; //0
+    finish; //1
+    wall; //2
+};
 
 /**
  * This structure describes a single maze element.
@@ -11,49 +13,39 @@ struct MazeElement {
     /**
      * Maze element type.
      *
-     * @see MAZE_ELEMENT_TYPE_*
+     * @see enum MazeElementType*
      */
-    MazeElementType type = MAZE_ELEMENT_TYPE_EMPTY;
-    /**
-     * Pointer to the element in the "up" direction.
-     */
-    MazeElement* up;
-    /**
-     * Pointer to the element in the "down" direction.
-     */
-    MazeElement* down;
-    /**
-     * Pointer to the element in the "right" direction.
-     */
-    MazeElement* right;
-    /**
-     * Pointer to the element in the "left" direction.
-     */
-    MazeElement* left;
+    MazeElementType type = empty;
 };
 
 /**
  * This class stores the maze structure.
  */
 class Maze {
+    /**
+     * Pointer to a 2 dimensional array of struct MazeElement
+     */
+    MazeElement **completeMaze;
+
 public:
     /**
      * Initialize the maze to a certain size.
      *
      * @param sizeX
      * @param sizeY
-     * @param robot
      */
     Maze(int sizeX, int sizeY);
     /**
+     * Sets the element type in a specific position
+     *
      * @param x
      * @param y
-     * @param element @see MAZE_ELEMENT_TYPE_*
+     * @param element type
      */
-    setElementType(int x, int y, MazeElementType element);
+    void setElementType(int x, int y, MazeElementType type);
 
     /**
-     * Returns the element in a specific position.
+     * Returns the element type in a specific position.
      */
     MazeElementType getElementType(int x, int y);
 };
